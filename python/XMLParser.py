@@ -1,11 +1,16 @@
 import pandas as pd
 import xml.etree.ElementTree as ET
-from datetime import datetime
 import os
 import Settings
 
+from datetime import datetime
+from abc import ABC, abstractmethod
+from typing import Dict, Any
 
-class XMLParser:
+# TODO: Build decorator for Attribute Error exception
+
+
+class XMLParser(ABC):
     def __init__(self, filepath: str) -> None:
         self.input_filename = os.path.splitext(filepath.split("/")[-1])[0]
         self.tree = ET.parse(filepath)
@@ -19,9 +24,6 @@ class XMLParser:
         return datetime.strptime(
             timestamp_without_timezone, "%a, %d %b %Y %H:%M:%S"
         ).isoformat()
-
-    def _convert_guid(self, guid: str) -> str:
-        return guid.strip("{}").replace("urn", "").replace("uuid", "").replace(":", "")
 
     def get_article_title(self, rss_item):
         try:
@@ -47,17 +49,6 @@ class XMLParser:
         except AttributeError:
             return None
 
-    def get_article_creators(self, rss_item):
-        creator_namespace = "{http://purl.org/dc/elements/1.1/}"
-        try:
-            full_creator_string = rss_item.find(creator_namespace + "creator").text
-            creators = full_creator_string.split(" - ")[-1].strip()
-            if creators == "":
-                return "No author"
-            return creators
-        except AttributeError:
-            return None
-
     def get_article_timestamp(self, rss_item):
         try:
             return self._convert_timestamp_to_iso(rss_item.find("pubDate").text)
@@ -66,22 +57,28 @@ class XMLParser:
 
     def get_article_guid(self, rss_item):
         try:
-            return self._convert_guid(rss_item.find("guid").text)
+            return rss_item.find("guid").text
         except AttributeError:
             return None
 
-    def get_article_details(self, rss_item):
-        return {
-            "guid": self.get_article_guid(rss_item),
-            "title": self.get_article_title(rss_item),
-            "link": self.get_article_link(rss_item),
-            "description": self.get_article_description(rss_item),
-            "category": self.get_article_category(rss_item),
-            "creators": self.get_article_creators(rss_item),
-            "timestamp": self.get_article_timestamp(rss_item),
-        }
+    @abstractmethod
+    def get_article_details(self, rss_item: ET.Element) -> Dict[str, Any]:
+        """Fetches all information from a single RSS item and returns it as a dictionary
+
+        Args:
+            rss_item (ET.Element): RSS Feed Item as a Element Tree object
+
+        Returns:
+            Dict[str, Any]: RSS Feed Item fields extracted into a dictionary
+        """
+        pass
 
     def create_article_dataframe(self) -> pd.DataFrame:
+        """Converts RSS Feed Items into a pandas dataframe
+
+        Returns:
+            pd.DataFrame: Dataframe containing structured data formerly contained in RSS Feed items
+        """
         article_details = []
 
         for article in self.root[0].findall("item"):

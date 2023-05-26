@@ -11,3 +11,4 @@ BASE_DIR = "/opt/airflow/python/data"
 # TRANSFORMED_DATA_DIR = os.path.join(BASE_DIR, "transformed")
 
 ZEIT_URL = "https://newsfeed.zeit.de/index"
+FAZ_URL = "https://www.faz.net/rss/aktuell"
