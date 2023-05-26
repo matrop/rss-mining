@@ -33,7 +33,7 @@ def load_csv(**kwargs):
     parsed_rss_filename = ti.xcom_pull(task_ids="parse_rss_feed")
 
     hook = PostgresHook(postgres_conn_id="postgres_default")
-    hook.bulk_load("raw.zeit", parsed_rss_filename)
+    hook.bulk_load("raw.zeit", parsed_rss_filename)  # TODO: Create settings.py for table names
 
 
 with DAG(
@@ -42,6 +42,7 @@ with DAG(
     start_date=datetime.datetime(2021, 1, 1),
     catchup=False,
 ) as dag:
+    # TODO: Change to new decorator-based notation
     get_rss = PythonOperator(task_id="get_rss_feed", python_callable=get_rss_feed)
     parse_rss = PythonOperator(
         task_id="parse_rss_feed", python_callable=parse_rss_feed, provide_context=True,
