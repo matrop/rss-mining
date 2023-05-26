@@ -1,5 +1,6 @@
 ## XMLParser:
 - Make this an abstract class and implement single parsers for different sources (Zeit, FAZ, etc.). Factory pattern
+- Add Unit Tests
 
 ## New Source: FAZ
 - Try to fetch the FAZ RSS feed
