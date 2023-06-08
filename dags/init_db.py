@@ -1,10 +1,16 @@
 import datetime
+import os
 
 from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.decorators import task
 
+from dotenv import load_dotenv, find_dotenv
+
 from sqlalchemy.exc import IntegrityError
+
+env_file = find_dotenv(os.path.join(".database.env"))
+load_dotenv(env_file)
 
 with DAG(
     dag_id="init_db",
@@ -18,15 +24,15 @@ with DAG(
         from airflow.models import Connection
         from airflow import settings
 
-        # TODO: Put credentials somewhere safe
+        print("User: " + os.environ.get("USER"))
 
         new_conn = Connection(
             conn_id="postgres_default",
             conn_type="postgres",
-            login="airflow",
-            password="airflow",
-            host="postgres",
-            port=5432,
+            login=os.environ.get("USER"),
+            password=os.environ.get("PASSWORD"),
+            host=os.environ.get("HOST"),
+            port=os.environ.get("PORT"),
         )
 
         session = settings.Session()
