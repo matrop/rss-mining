@@ -20,9 +20,8 @@ class XMLParser(ABC):
         )
 
     def _convert_timestamp_to_iso(self, timestamp: str) -> str:
-        timestamp_without_timezone = timestamp[:-6]
         return datetime.strptime(
-            timestamp_without_timezone, "%a, %d %b %Y %H:%M:%S"
+            timestamp, "%a, %d %b %Y %H:%M:%S %z"
         ).isoformat()
 
     def get_article_title(self, rss_item):

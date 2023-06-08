@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 
-CONFIG = Settings.SOURCE_CONFIG["ZEIT"]
+CONFIG = Settings.SOURCE_CONFIG["SZ"]
 
 
 def get_rss_feed():
@@ -17,12 +17,12 @@ def get_rss_feed():
 
 
 def parse_rss_feed(**kwargs):
-    from ZEITParser import ZEITParser
+    from SZParser import SZParser
 
     ti = kwargs["ti"]
     rss_filename = ti.xcom_pull(task_ids="get_rss_feed")
 
-    xml_parser = ZEITParser(rss_filename)
+    xml_parser = SZParser(rss_filename)
     xml_parser.save_to_csv()
     return xml_parser.output_filename
 
