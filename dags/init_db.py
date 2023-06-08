@@ -4,6 +4,8 @@ from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.decorators import task
 
+from sqlalchemy.exc import IntegrityError
+
 with DAG(
     dag_id="init_db",
     schedule_interval=None,
@@ -16,7 +18,6 @@ with DAG(
         from airflow.models import Connection
         from airflow import settings
 
-        # TODO: This fails when connection already exists
         # TODO: Put credentials somewhere safe
 
         new_conn = Connection(
@@ -29,8 +30,12 @@ with DAG(
         )
 
         session = settings.Session()
-        session.add(new_conn)
-        session.commit()
+        try:
+            session.add(new_conn)
+            session.commit()
+        except IntegrityError:
+            print(f"Connection '{new_conn.conn_id}' already exists, skipping...")
+
         session.close()
 
     init_scripts = [
