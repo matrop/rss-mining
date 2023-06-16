@@ -9,6 +9,10 @@
 - Create UUID for incoming rows via UUID postgres extension
 - Create an integration table and append newly arrived raw data to it -> dbt
 
+## dbt
+
+- Create Staging Table to hold all fetched articles and upsert it with raw articles
+
 ## Source: SZ
 
 - Fetch categories into own table to map 1:n (article - categories) relationship
