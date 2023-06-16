@@ -12,3 +12,7 @@
 ## Source: SZ
 
 - Fetch categories into own table to map 1:n (article - categories) relationship
+
+## Source: Zeit
+
+- Fetch authors into own table to map n:m relationship
