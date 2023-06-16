@@ -28,7 +28,9 @@ class SZParser(XMLParser):
 
             soup = BeautifulSoup(raw_description, "html.parser")
             return soup.find_all("p")[-1].get_text()
-        except AttributeError:
+        except AttributeError:  # Article has no description
+            return None
+        except IndexError:  # Article has no text in description
             return None
 
     def _convert_timestamp_to_iso(self, timestamp: str) -> str:
