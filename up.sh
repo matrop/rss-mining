@@ -4,4 +4,4 @@ echo "Containers stopped!"
 
 echo "Building and starting docker image"
 
-docker-compose --env-file .env up --build  --remove-orphans
+docker-compose --env-file .env up --build --remove-orphans
