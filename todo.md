@@ -8,7 +8,6 @@
 
 ## dbt
 
-- Add to README: Run `dbt deps` for setup
 
 ## Source: SZ
 
