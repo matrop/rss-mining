@@ -12,6 +12,7 @@
 ## dbt
 
 - Create Staging Table to hold all fetched articles and upsert it with raw articles
+- Add to README: Run `dbt deps` for setup
 
 ## Source: SZ
 
@@ -20,3 +21,8 @@
 ## Source: Zeit
 
 - Fetch authors into own table to map n:m relationship
+
+
+## Features
+
+- Add translation API to translate article headlines and descriptions
