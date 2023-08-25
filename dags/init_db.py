@@ -45,7 +45,7 @@ with DAG(
         session.close()
 
     init_scripts = [
-        "create_schema_raw",
+        "create_schemas",
         "create_raw_zeit",
         "create_raw_faz",
         "create_raw_sz",
