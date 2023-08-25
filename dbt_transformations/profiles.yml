@@ -3,7 +3,7 @@ dbt_transformations:
     dev:
       type: postgres
       threads: 1
-      host: postgres
+      host: localhost
       port: 5432
       user: airflow
       pass: airflow
