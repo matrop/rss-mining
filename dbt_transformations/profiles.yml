@@ -1,3 +1,19 @@
+# Used in Airflow DAG - Mind the differences between hosts
+dbt_transformations_airflow:
+  outputs:
+    dev:
+      type: postgres
+      threads: 1
+      host: postgres
+      port: 5432
+      user: airflow
+      pass: airflow
+      dbname: airflow
+      schema: raw
+
+  target: dev
+
+# Used for development via CLI
 dbt_transformations:
   outputs:
     dev:
