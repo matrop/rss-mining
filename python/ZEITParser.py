@@ -2,8 +2,8 @@ from XMLParser import XMLParser
 
 
 class ZEITParser(XMLParser):
-    def __init__(self, filepath: str):
-        super().__init__(filepath)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def get_article_details(self, rss_item):
         return {

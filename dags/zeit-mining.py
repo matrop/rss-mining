@@ -7,6 +7,7 @@ from Settings import IngestionSettings, airflowSettings
 from ZEITParser import ZEITParser
 
 ingestionSettings = IngestionSettings(
+    ingestion_source_name="zeit",
     ingestion_dag_name="zeit-mining",
     rss_feed_url="https://newsfeed.zeit.de/index",
     parser_class=ZEITParser,
