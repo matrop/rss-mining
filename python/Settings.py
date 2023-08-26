@@ -1,29 +1,31 @@
-import os
+from XMLParser import XMLParser
 
-# Airflow configuration
-RAW_DATA_DIR = "/opt/airflow/python/data/raw"
-TRANSFORMED_DATA_DIR = "/opt/airflow/python/data/transformed"
-BASE_DIR = "/opt/airflow/python/data"
+from typing import Type
+from dataclasses import dataclass
 
-# Local configuration
-# BASE_DIR = "/home/matrops/git/rss-mining/data" 
-# RAW_DATA_DIR = os.path.join(BASE_DIR, "raw")
-# TRANSFORMED_DATA_DIR = os.path.join(BASE_DIR, "transformed")
 
-SOURCE_CONFIG = {
-    "ZEIT": {
-        "url": "https://newsfeed.zeit.de/index",
-        "raw_table_name": "raw.zeit",
-        "ingestion_dag_name": "zeit-mining",
-    },
-    "FAZ": {
-        "url": "https://www.faz.net/rss/aktuell",
-        "raw_table_name": "raw.faz",
-        "ingestion_dag_name": "faz-mining",
-    },
-    "SZ": {
-        "url": "https://rss.sueddeutsche.de/alles",
-        "raw_table_name": "raw.sz",
-        "ingestion_dag_name": "sz-mining",
-    },
-}
+@dataclass
+class IngestionSettings:
+    ingestion_dag_name: str
+    rss_feed_url: str
+    parser_class: Type[XMLParser]
+    raw_table_name: str
+    mart_table_name: str
+
+
+@dataclass
+class AirflowSettings:
+    raw_data_dir: str
+    transformed_data_dir: str
+    base_dir: str
+    dbt_project_dir: str
+    dbt_profile_name: str
+
+
+airflowSettings = AirflowSettings(
+    raw_data_dir="/opt/airflow/python/data/raw",
+    transformed_data_dir="/opt/airflow/python/data/transformed",
+    base_dir="/opt/airflow/python/data",
+    dbt_project_dir="/opt/airflow/dbt_transformations",
+    dbt_profile_name="dbt_transformations_airflow",
+)

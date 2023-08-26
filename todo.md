@@ -1,22 +1,28 @@
 ## XMLParser:
-- Make this an abstract class and implement single parsers for different sources (Zeit, FAZ, etc.). Factory pattern
+
 - Add Unit Tests
 
 ## Database:
-- Create dbt database user
-- Move tables into own database, do not use Airflow database
 
-- Create UUID for incoming rows via UUID postgres extension
-- Create an integration table and append newly arrived raw data to it -> dbt
+- Create dbt database user
 
 ## dbt
 
-- Create Staging Table to hold all fetched articles and upsert it with raw articles
+## Visualization
+
+- Finde visualisation tool and build a dashboard
 
 ## Source: SZ
 
-- Fetch categories into own table to map 1:n (article - categories) relationship
+- Drop categories
 
 ## Source: Zeit
 
-- Fetch authors into own table to map n:m relationship
+- Drop Authors, Descriptions
+
+## Features
+
+- Add translation API to translate article headlines and descriptions
+- Create own database for dbt data (Do not write it into Airflow DB)
+- DAG to insert all sources and update central mart
+- DAG processes all files in source folder and moves them to archive afterwards
