@@ -83,11 +83,31 @@ services:
       - 5432:5432
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
+      - ./postgres-init-files:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 5s
       retries: 5
     restart: always
+
+  metabase:
+    image: metabase/metabase
+    restart: always
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: rss_mining
+      MB_DB_PORT: 5432
+      MB_DB_USER: airflow
+      MB_DB_HOST: postgres
+      MB_DB_PASS: airflow
+      JAVA_TIMEZONE: Europe/Berlin
+    ports:
+      - 3000:3000
+    volumes:
+      # Volumes where Metabase data will be persisted
+      - 'mb-data:/metabase-data'
+    depends_on:
+      - postgres
 
   redis:
     image: redis:latest
@@ -287,3 +307,4 @@ services:
 
 volumes:
   postgres-db-volume:
+  mb-data:
