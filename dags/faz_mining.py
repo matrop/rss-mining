@@ -4,15 +4,15 @@ import datetime
 
 from AirflowUtils import rss_ingestion_taskflow
 from Settings import IngestionSettings, airflowSettings
-from ZEITParser import ZEITParser
+from FAZParser import FAZParser
 
 ingestionSettings = IngestionSettings(
-    ingestion_source_name="zeit",
-    ingestion_dag_name="zeit-mining",
-    rss_feed_url="https://newsfeed.zeit.de/index",
-    parser_class=ZEITParser,
-    raw_table_name="raw.zeit",
-    mart_table_name="mart_zeit",
+    ingestion_source_name="faz",
+    ingestion_dag_name="fetch-sources.faz",
+    rss_feed_url="https://www.faz.net/rss/aktuell",
+    parser_class=FAZParser,
+    raw_table_name="raw.faz",
+    mart_table_name="mart_faz",
 )
 
 

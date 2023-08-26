@@ -4,15 +4,15 @@ import datetime
 
 from AirflowUtils import rss_ingestion_taskflow
 from Settings import IngestionSettings, airflowSettings
-from SZParser import SZParser
+from ZEITParser import ZEITParser
 
 ingestionSettings = IngestionSettings(
-    ingestion_source_name="sz",
-    ingestion_dag_name="sz-mining",
-    rss_feed_url="https://rss.sueddeutsche.de/alles",
-    parser_class=SZParser,
-    raw_table_name="raw.sz",
-    mart_table_name="mart_sz",
+    ingestion_source_name="zeit",
+    ingestion_dag_name="fetch-sources.zeit",
+    rss_feed_url="https://newsfeed.zeit.de/index",
+    parser_class=ZEITParser,
+    raw_table_name="raw.zeit",
+    mart_table_name="mart_zeit",
 )
 
 
