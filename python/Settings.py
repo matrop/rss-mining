@@ -1,4 +1,4 @@
-from XMLParser import XMLParser
+from __future__ import annotations  # Cannot import XMLParser since it needs the Ingestnio Settings class
 
 from typing import Type
 from dataclasses import dataclass
@@ -6,6 +6,7 @@ from dataclasses import dataclass
 
 @dataclass
 class IngestionSettings:
+    ingestion_source_name: str
     ingestion_dag_name: str
     rss_feed_url: str
     parser_class: Type[XMLParser]
