@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: raw
-    database: airflow  
     schema: raw  
     tables:
       - name: faz

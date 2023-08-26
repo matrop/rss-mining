@@ -8,8 +8,8 @@ dbt_transformations_airflow:
       port: 5432
       user: airflow
       pass: airflow
-      dbname: airflow
-      schema: raw
+      dbname: rss_mining
+      schema: dbt
 
   target: dev
 
@@ -23,7 +23,7 @@ dbt_transformations:
       port: 5432
       user: airflow
       pass: airflow
-      dbname: airflow
-      schema: raw
+      dbname: rss_mining
+      schema: dbt
 
   target: dev

@@ -33,6 +33,7 @@ with DAG(
             password=os.environ.get("PASSWORD"),
             host=os.environ.get("HOST"),
             port=os.environ.get("PORT"),
+            schema=os.environ.get("SCHEMA"),
         )
 
         session = settings.Session()
