@@ -7,6 +7,7 @@ from Settings import IngestionSettings, airflowSettings
 from FAZParser import FAZParser
 
 ingestionSettings = IngestionSettings(
+    ingestion_source_name="faz",
     ingestion_dag_name="faz-mining",
     rss_feed_url="https://www.faz.net/rss/aktuell",
     parser_class=FAZParser,

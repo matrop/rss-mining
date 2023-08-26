@@ -7,6 +7,7 @@ from Settings import IngestionSettings, airflowSettings
 from SZParser import SZParser
 
 ingestionSettings = IngestionSettings(
+    ingestion_source_name="sz",
     ingestion_dag_name="sz-mining",
     rss_feed_url="https://rss.sueddeutsche.de/alles",
     parser_class=SZParser,
