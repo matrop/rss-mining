@@ -7,5 +7,5 @@ select
     timestamp :: TIMESTAMP,
     'ZEIT' :: VARCHAR AS source
 
-from {{ source("raw", "faz") }}
+from {{ source("raw", "zeit") }}
 
