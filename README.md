@@ -16,8 +16,6 @@ To achieve this, the RSS feeds of three different german newspapers (Frankfurter
 
 ![Architecture image](images/architecture.png)
 
-If you decide to include this, you should also talk a bit about why you chose the architecture and tools you did for this project.
-
 ## Prerequisites
 
 This project was developed using:
