@@ -4,8 +4,9 @@ select
     title :: VARCHAR,
     link :: VARCHAR,
     description :: VARCHAR,
+    category :: VARCHAR,
     timestamp :: TIMESTAMP,
     'ZEIT' :: VARCHAR AS source
 
-from {{ source("raw", "faz") }}
+from {{ source("raw", "zeit") }}
 

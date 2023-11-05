@@ -13,6 +13,7 @@ class SZParser(XMLParser):
             "title": self.get_article_title(rss_item),
             "link": self.get_article_link(rss_item),
             "description": self.get_article_description(rss_item),
+            "category": self.get_article_category(rss_item),
             "timestamp": self.get_article_timestamp(rss_item),
         }
 
@@ -32,6 +33,14 @@ class SZParser(XMLParser):
             return None
         except IndexError:  # Article has no text in description
             return None
+
+    def get_article_category(self, rss_item):
+        link = self.get_article_link(rss_item)
+
+        if link is None:
+            return None
+
+        return link.strip("/").split("/")[-2]
 
     def _convert_timestamp_to_iso(self, timestamp: str) -> str:
         return (

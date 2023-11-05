@@ -10,6 +10,7 @@ select
     title,
     link,
     description,
+    category,
     timestamp,
     source
 

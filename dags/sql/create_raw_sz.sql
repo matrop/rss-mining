@@ -5,5 +5,6 @@ CREATE TABLE raw.sz (
     title VARCHAR NULL,
     link VARCHAR NULL,
     description VARCHAR NULL,
+    category VARCHAR NULL,
     timestamp VARCHAR NULL
 );

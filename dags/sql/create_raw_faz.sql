@@ -5,5 +5,6 @@ CREATE TABLE raw.faz (
     title VARCHAR NULL,
     link VARCHAR NULL,
     description VARCHAR NULL,
+    category VARCHAR NULL,
     timestamp VARCHAR NULL
 );
