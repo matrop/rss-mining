@@ -8,7 +8,7 @@ from SZParser import SZParser
 
 ingestionSettings = IngestionSettings(
     ingestion_source_name="sz",
-    ingestion_dag_name="fetch-sources.sz",
+    ingestion_dag_name="fetch-sz",
     rss_feed_url="https://rss.sueddeutsche.de/alles",
     parser_class=SZParser,
     raw_table_name="raw.sz",
@@ -18,7 +18,7 @@ ingestionSettings = IngestionSettings(
 
 @dag(
     dag_id=ingestionSettings.ingestion_dag_name,
-    schedule_interval=None,
+    schedule_interval=datetime.timedelta(minutes=30),
     start_date=datetime.datetime(2021, 1, 1),
     catchup=False,
 )

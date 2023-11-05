@@ -8,7 +8,7 @@ from FAZParser import FAZParser
 
 ingestionSettings = IngestionSettings(
     ingestion_source_name="faz",
-    ingestion_dag_name="fetch-sources.faz",
+    ingestion_dag_name="fetch-faz",
     rss_feed_url="https://www.faz.net/rss/aktuell",
     parser_class=FAZParser,
     raw_table_name="raw.faz",
@@ -18,7 +18,7 @@ ingestionSettings = IngestionSettings(
 
 @dag(
     dag_id=ingestionSettings.ingestion_dag_name,
-    schedule_interval=None,
+    schedule_interval=datetime.timedelta(minutes=30),
     start_date=datetime.datetime(2021, 1, 1),
     catchup=False,
 )
