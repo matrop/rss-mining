@@ -4,6 +4,7 @@ select
     title :: VARCHAR,
     link :: VARCHAR,
     description :: VARCHAR,
+    category :: VARCHAR,
     timestamp :: TIMESTAMP,
     'ZEIT' :: VARCHAR AS source
 
